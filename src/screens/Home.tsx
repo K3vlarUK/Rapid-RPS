@@ -1,14 +1,17 @@
+import { useNavigation } from '@react-navigation/native'
 import React from 'react'
 import { Button, SafeAreaView, StyleSheet, Text, View, Image } from 'react-native'
 
-const Home = () => {
+const Home: React.FC = () => {
+
+    const navigation = useNavigation();
     return (
         <SafeAreaView style={styles.mainContainer}>
             <Text style={styles.text}>Rapid Rock Paper Scissors</Text>
-            <Image style={{width: '20%'}} source={require('../../assets/icons/9-2-rock-png.png')}/>
-            <Button title={'Play'} onPress={() => alert('Howdy!!!')}/>
-            <Button title={'Settings'} onPress={() => alert('Howdy!!!')}/>
-            <Button title={'Contact'} onPress={() => alert('Howdy!!!')}/>
+            <Image style={{width: '90%', alignSelf: 'center'}} source={require('../../assets/icons/9-2-rock-png.png')}/>
+            <Button title={'Play'} onPress={() => navigation.navigate('Play')}/>
+            <Button title={'Settings'} onPress={() => navigation.navigate('Settings')}/>
+            <Button title={'Contact'} onPress={() => navigation.navigate('Contact')}/>
         </SafeAreaView>
     )
 }
