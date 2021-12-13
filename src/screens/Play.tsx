@@ -5,6 +5,7 @@ import { gameOptions } from '../lib/values';
 const Play = () => {
     const [playerValue, setPlayerValue] = useState<string | null>(null)
     const [aiValue, setAiValue] = useState<string | null>(null);
+    const [winner, setWinner] = useState<string | null>(null);
     const playerOptions = Object.keys(gameOptions);
 
     const getRandomOption = () => {
@@ -16,6 +17,18 @@ const Play = () => {
         const values = Object.keys(gameOptions);
         const enumKey = values[Math.floor(Math.random() * values.length)];
         return selectedEnum[enumKey];
+    }
+
+    async function getBothOptions(playersChoice: string) {
+        setPlayerValue(playersChoice);
+        getRandomOption();
+    }
+
+    const runAGame = (playersChoice: string) => {
+        getBothOptions(playersChoice)
+        .then(() => {
+            // Put in a comparison switch statement
+        })
     }
     
 
@@ -31,12 +44,11 @@ const Play = () => {
                         playerOptions.map((option, index) => {
                             const capitalizedOption = option[0].toUpperCase() + option.substr(1).toLowerCase();
                             return (
-                                <Button onPress={() => setPlayerValue(capitalizedOption)} title={option} key={index} />
+                                <Button onPress={() => runAGame(capitalizedOption)} title={option} key={index} />
                             )
                         })
                     }
                 </View>
-                <Button onPress={() => getRandomOption()} title={'Press for Random Value'}/>
             </View>
             <View style={{display: 'flex', paddingHorizontal: 10, paddingVertical: 20}}>
                 <Text>You Chose: {playerValue}</Text>
